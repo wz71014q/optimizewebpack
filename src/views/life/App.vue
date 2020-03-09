@@ -1,0 +1,32 @@
+<template>
+  <div>
+    <p class="test-text">
+      hello123451
+    </p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      name: "Alice"
+    };
+  },
+  created () {
+    console.log('created')
+  },
+  mounted () {
+    console.log('MOUNTED')
+  },
+  methods: {
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.test-text {
+  font-size: 50px;
+}
+</style>
