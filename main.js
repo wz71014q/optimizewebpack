@@ -1,10 +1,12 @@
 import Vue from 'vue';
-import App from './src/views/life/App';
+import App from './src/views/App';
+import router from './src/router'
 
 const $vm = new Vue({
   el: '#root',
+  router,
   components: { App },
-  template: '<App/>',
+  template: '<App/>'
 });
 Vue.use($vm);
 console.log('success');
