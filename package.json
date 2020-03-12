@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./config/webpack.server.js",
+    "start": "node ./config/webpack.dev.js",
     "dev": "webpack-dev-server",
     "build": "node ./config/webpack.pro.js",
     "test": "jest --no-cache --runInBand"
@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "express": "^4.17.1",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "ip": "^1.1.5",
     "portfinder": "^1.0.25",
     "webpack-chain": "^6.4.0",

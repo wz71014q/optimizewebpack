@@ -2,6 +2,7 @@ const path = require('path');
 const WebpackChain = require('webpack-chain');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 const webpackChainConfig = new WebpackChain();
 
