@@ -11,7 +11,6 @@ export default {
   name: 'Life',
   data() {
     return {
-      name: "Alice"
     };
   },
   created () {

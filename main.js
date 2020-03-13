@@ -9,4 +9,3 @@ const $vm = new Vue({
   template: '<App/>'
 });
 Vue.use($vm);
-console.log('success');
