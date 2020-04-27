@@ -14,6 +14,7 @@ function getEntry() {
     .plugin(`html-${item}`)
     .use(HtmlWebpackPlugin, [{
       filename: `${item}.html`,
+      chunks: [item],
       template: path.resolve(__dirname,'../public/index.html')// template
     }])
   })
@@ -92,12 +93,6 @@ webpackChainConfig.module
         publicPath: "./fonts/",
         outputPath: "fonts/"
       })
-
-webpackChainConfig
-  .plugin('HtmlWebpackPlugin')
-  .use(HtmlWebpackPlugin, [{
-    template: path.resolve(__dirname,'../public/index.html')// template
-  }])
 
 webpackChainConfig
   .plugin('VueLoaderPlugin')
