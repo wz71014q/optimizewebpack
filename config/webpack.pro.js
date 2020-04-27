@@ -5,12 +5,21 @@ const webpack = require('webpack');
 const WebpackChain = require('webpack-chain');
 const webpackMerge = require('webpack-merge');
 const common = require('./webpack.common');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const webpackChainConfig = new WebpackChain();
 
 webpackChainConfig
   .context(path.resolve(__dirname, '../'))
   .mode('production')
+console.log('process.env.NODE_ENV: ', process.env.NODE_ENV)
+
+if (process.env.NODE_ENV === 'analyze') {
+  webpackChainConfig.plugin('BundleAnalyzerPlugin')
+    .use(BundleAnalyzerPlugin, [{
+      analyzerPort: 8900
+    }])
+}
 
 webpackChainConfig.module
   .rule('css')
