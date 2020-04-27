@@ -2,15 +2,26 @@ const path = require('path');
 const WebpackChain = require('webpack-chain');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const entries = require('./entry.js');
 
+const entryArray = Object.keys(entries);
 const webpackChainConfig = new WebpackChain();
 
+function getEntry() {
+  entryArray.forEach(item => {
+    webpackChainConfig.entry(item).merge([entries[item]]);
+    webpackChainConfig
+    .plugin(`html-${item}`)
+    .use(HtmlWebpackPlugin, [{
+      filename: `${item}.html`,
+      template: path.resolve(__dirname,'../public/index.html')// template
+    }])
+  })
+}
+
+getEntry()
+
 webpackChainConfig
-  .entry('main')
-  .add(path.resolve(__dirname, '../main.js'))
-    .end()
   .output
     .path(path.resolve(__dirname, '../dist'))
     .filename('[name].[hash:8].js')

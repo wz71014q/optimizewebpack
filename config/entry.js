@@ -1,20 +1,21 @@
 const fs = require('fs');
 const path = require('path');
-const rimraf = require('rimraf')
+const rimraf = require('rimraf');
 
-const fileDirList = fs.readdirSync(path.resolve(__dirname, '../src/views'));
-const entriesDir = path.resolve(process.cwd(), './entries');
+const fileDirList = fs.readdirSync(path.resolve(process.cwd(), 'src/views'));
+const entriesDir = path.resolve(process.cwd(), 'entries');
 const entries = {};
 
-function buildEntry() {
+const buildEntry = function() {
   fileDirList.forEach(item => {
-    const stat = fs.statSync(path.resolve(__dirname, '../src/views', item));
+    const stat = fs.statSync(path.resolve(process.cwd(), 'src/views', item));
     if (stat.isDirectory()) {
       entries[item] = buildEntryFile(item);
     } else {
       entries[item] = buildEntryFile(item.split('.')[0]);
     }
   })
+  fs.writeFileSync(`${path.resolve(entriesDir, 'page')}.js`, `module.exports = ${JSON.stringify(entries)}`)
   return entries
 }
 
@@ -29,7 +30,7 @@ function buildEntryFile(pageName) {
 function buildFileContent(name) {
   const templateHome = `
   import Vue from 'vue';
-  import App from '@/views/App';
+  import App from '@/views/Home';
   import router from '@/router'
   const $vm = new Vue({
     el: '#root',
@@ -37,7 +38,7 @@ function buildFileContent(name) {
     components: { App },
     template: '<App/>'
   });
-  Vue.use($vm);
+  $vm.$mount('#root');
   `
   const template = `
     import Vue from 'vue';
@@ -47,7 +48,7 @@ function buildFileContent(name) {
       components: { App },
       template: '<App/>'
     });
-    $vm.$mount('#app');
+    $vm.$mount('#root');
   `
   if (name === 'Home') {
     return templateHome;
@@ -55,10 +56,10 @@ function buildFileContent(name) {
   return template;
 }
 
-module.exports = function() {
+module.exports = (function() {
   if (fs.existsSync(entriesDir)) {
     rimraf.sync(entriesDir)
   }
   fs.mkdirSync(entriesDir)
   return buildEntry()
-}
+}())

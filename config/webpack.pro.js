@@ -1,8 +1,10 @@
 const path = require('path');
+const fs = require('fs');
+const rimraf = require('rimraf');
 const webpack = require('webpack');
 const WebpackChain = require('webpack-chain');
 const webpackMerge = require('webpack-merge');
-const common = require('./webpack.common')
+const common = require('./webpack.common');
 
 const webpackChainConfig = new WebpackChain();
 
@@ -34,6 +36,10 @@ webpackChainConfig.module
       .loader('postcss-loader')
       .end()
 const proConfig = webpackMerge(webpackChainConfig.toConfig(), common);
+
+if (fs.existsSync(path.resolve(__dirname, '../dist'))) {
+  rimraf.sync(path.resolve(__dirname, '../dist'))
+}
 
 webpack(proConfig, (err, stas) => {
   if (err) {
