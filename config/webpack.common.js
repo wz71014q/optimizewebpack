@@ -14,7 +14,7 @@ function getEntry() {
     .plugin(`html-${item}`)
     .use(HtmlWebpackPlugin, [{
       filename: `${item}.html`,
-      chunks: [item],
+      chunks: [item, 'vendor', 'vue'],
       template: path.resolve(__dirname,'../public/index.html')// template
     }])
   })
@@ -104,6 +104,7 @@ webpackChainConfig
   .use(VueLoaderPlugin, [{
     log: false
   }])
+
 webpackChainConfig
   .plugin(`index`)
   .use(HtmlWebpackPlugin, [{
@@ -111,5 +112,33 @@ webpackChainConfig
     chunks: ['main'],
     template: path.resolve(__dirname,'../public/index.html')// template
   }])
+
+webpackChainConfig.optimization
+  .splitChunks({
+    chunks: 'all',
+    minSize: 30000,
+    minChunks: 1,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,
+    automaticNameDelimiter: '~',
+    name: true,
+    cacheGroups: {
+      vue: {
+        test: /vue/,
+        chunks: "initial",
+        name: "vue",
+        priority: 10,
+        enforce: true
+      },
+      vendor: {
+        test: /node_modules/,
+        name: "vendor",
+        chunks: "initial",
+        minChunks: 2,
+        maxInitialRequests: 5,
+        minSize: 0
+      }
+    }
+  })
 module.exports = webpackChainConfig.toConfig();
 

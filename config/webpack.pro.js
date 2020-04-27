@@ -6,13 +6,14 @@ const WebpackChain = require('webpack-chain');
 const webpackMerge = require('webpack-merge');
 const common = require('./webpack.common');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 
 const webpackChainConfig = new WebpackChain();
+const smp = new SpeedMeasurePlugin();
 
 webpackChainConfig
   .context(path.resolve(__dirname, '../'))
   .mode('production')
-console.log('process.env.NODE_ENV: ', process.env.NODE_ENV)
 
 if (process.env.NODE_ENV === 'analyze') {
   webpackChainConfig.plugin('BundleAnalyzerPlugin')
@@ -44,7 +45,7 @@ webpackChainConfig.module
     .use('sass-loader')
       .loader('postcss-loader')
       .end()
-const proConfig = webpackMerge(webpackChainConfig.toConfig(), common);
+const proConfig = smp.wrap(webpackMerge(webpackChainConfig.toConfig(), common));
 
 if (fs.existsSync(path.resolve(__dirname, '../dist'))) {
   rimraf.sync(path.resolve(__dirname, '../dist'))
