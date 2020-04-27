@@ -3,21 +3,28 @@
     <p class="test-text">
       Menu
     </p>
+    <div>
+      {{ data }}
+    </div>
   </div>
 </template>
 
 <script>
+import mockData from '@/mock/mock';
+
 export default {
   name: 'Menu',
   data() {
     return {
+      data: ''
     };
   },
   created () {
-    console.log('created')
+    console.log(mockData)
   },
   mounted () {
     console.log('MOUNTED')
+    this.data = mockData;
   },
   methods: {
   }

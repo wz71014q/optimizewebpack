@@ -8,24 +8,32 @@ const entryArray = Object.keys(entries);
 const webpackChainConfig = new WebpackChain();
 
 function getEntry() {
+  webpackChainConfig
+    .entry('main')
+    .add(path.resolve(__dirname, '../main.js'))
+    .end()
+
+  webpackChainConfig
+  .plugin(`index`)
+  .use(HtmlWebpackPlugin, [{
+    filename: 'index.html',
+    chunks: ['main', 'vendor', 'vue'],
+    template: path.resolve(__dirname,'../public/index.html')// template
+  }])
+
   entryArray.forEach(item => {
     webpackChainConfig.entry(item).merge([entries[item]]);
     webpackChainConfig
     .plugin(`html-${item}`)
     .use(HtmlWebpackPlugin, [{
       filename: `${item}.html`,
-      chunks: [item, 'vendor', 'vue'],
+      chunks: [item, 'vendor', 'vue', 'mock'],
       template: path.resolve(__dirname,'../public/index.html')// template
     }])
   })
 }
 
 getEntry()
-
-webpackChainConfig
-  .entry('main')
-  .add(path.resolve(__dirname, '../main.js'))
-  .end()
 
 webpackChainConfig
   .output
@@ -105,14 +113,6 @@ webpackChainConfig
     log: false
   }])
 
-webpackChainConfig
-  .plugin(`index`)
-  .use(HtmlWebpackPlugin, [{
-    filename: 'index.html',
-    chunks: ['main'],
-    template: path.resolve(__dirname,'../public/index.html')// template
-  }])
-
 webpackChainConfig.optimization
   .splitChunks({
     chunks: 'all',
@@ -133,6 +133,14 @@ webpackChainConfig.optimization
       vendor: {
         test: /node_modules/,
         name: "vendor",
+        chunks: "initial",
+        minChunks: 2,
+        maxInitialRequests: 5,
+        minSize: 0
+      },
+      mock: {
+        test: /mock/,
+        name: "mock",
         chunks: "initial",
         minChunks: 2,
         maxInitialRequests: 5,

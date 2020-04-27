@@ -1,1 +1,1 @@
-module.exports = {"detail":"F:\\webWorkSpace\\entries\\detail.js","Home.vue":"F:\\webWorkSpace\\entries\\Home.js","life":"F:\\webWorkSpace\\entries\\life.js","menu":"F:\\webWorkSpace\\entries\\menu.js"}
+module.exports = {"detail":"E:\\optimizewebpack\\entries\\detail.js","Home.vue":"E:\\optimizewebpack\\entries\\Home.js","life":"E:\\optimizewebpack\\entries\\life.js","menu":"E:\\optimizewebpack\\entries\\menu.js"}

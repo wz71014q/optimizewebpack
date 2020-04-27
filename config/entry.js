@@ -33,7 +33,6 @@ function buildFileContent(name) {
   import App from '@/views/Home';
   import router from '@/router'
   const $vm = new Vue({
-    el: '#root',
     router,
     components: { App },
     template: '<App/>'
@@ -44,7 +43,6 @@ function buildFileContent(name) {
     import Vue from 'vue';
     import App from '@/views/${name}';
     const $vm = new Vue({
-      el: '#root',
       components: { App },
       template: '<App/>'
     });
