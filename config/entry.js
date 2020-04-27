@@ -15,7 +15,7 @@ const buildEntry = function() {
       entries[item] = buildEntryFile(item.split('.')[0]);
     }
   })
-  fs.writeFileSync(`${path.resolve(entriesDir, 'page')}.js`, `module.exports = ${JSON.stringify(entries)}`)
+  fs.writeFileSync(`${path.resolve(process.cwd(), 'src/pages')}.js`, `module.exports = ${JSON.stringify(entries)}`)
   return entries
 }
 

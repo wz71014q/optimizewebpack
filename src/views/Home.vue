@@ -10,7 +10,7 @@
 </template>
 
 <script>
-const pages = require('../../entries/page');
+const pages = require('../pages');
 
 export default {
   name: 'Home',
@@ -26,7 +26,7 @@ export default {
     init() {
       console.log(pages)
       for(const property in pages) {
-        this.pageList[property] = pages[property]
+        this.pageList[property] = `${property}.html`
       }
     }
   }

@@ -23,6 +23,11 @@ function getEntry() {
 getEntry()
 
 webpackChainConfig
+  .entry('main')
+  .add(path.resolve(__dirname, '../main.js'))
+  .end()
+
+webpackChainConfig
   .output
     .path(path.resolve(__dirname, '../dist'))
     .filename('[name].[hash:8].js')
@@ -99,6 +104,12 @@ webpackChainConfig
   .use(VueLoaderPlugin, [{
     log: false
   }])
-
+webpackChainConfig
+  .plugin(`index`)
+  .use(HtmlWebpackPlugin, [{
+    filename: 'index.html',
+    chunks: ['main'],
+    template: path.resolve(__dirname,'../public/index.html')// template
+  }])
 module.exports = webpackChainConfig.toConfig();
 

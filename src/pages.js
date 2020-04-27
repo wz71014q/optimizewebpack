@@ -1,0 +1,1 @@
+module.exports = {"detail":"F:\\webWorkSpace\\entries\\detail.js","Home.vue":"F:\\webWorkSpace\\entries\\Home.js","life":"F:\\webWorkSpace\\entries\\life.js","menu":"F:\\webWorkSpace\\entries\\menu.js"}
