@@ -26,6 +26,7 @@ webpackChainConfig
     .path(path.resolve(__dirname, '../dist'))
     .filename('[name].[hash:8].js')
     .publicPath('./')
+    .end()
 
 webpackChainConfig.resolve
   .extensions
