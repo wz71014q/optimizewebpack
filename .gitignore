@@ -1,2 +1,4 @@
 node_modules
 .vscode
+entries
+package-lock.json

@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import App from './src/views/App';
-import router from './src/router'
+import App from '@/views/Home';
+import router from '@/router'
 
 const $vm = new Vue({
   el: '#root',

@@ -3,10 +3,10 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Life = () => import('@/views/life')
+const Home = () => import('@/views/Home')
 
 const routes = [
-  { path: '/', name: 'Life', component: Life },
+  { path: '/', name: 'Home', component: Home },
 ]
 const router = new VueRouter({
   routes

@@ -16,6 +16,7 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "ip": "^1.1.5",
     "portfinder": "^1.0.25",
+    "rimraf": "^3.0.2",
     "webpack-chain": "^6.4.0",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.10.3",

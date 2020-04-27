@@ -3,12 +3,13 @@ const WebpackChain = require('webpack-chain');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const entries = require('./entry.js');
 
 const webpackChainConfig = new WebpackChain();
 
 webpackChainConfig
   .entry('main')
-    .add(path.resolve(__dirname, '../main.js'))
+  .add(path.resolve(__dirname, '../main.js'))
     .end()
   .output
     .path(path.resolve(__dirname, '../dist'))
@@ -83,7 +84,7 @@ webpackChainConfig.module
 webpackChainConfig
   .plugin('HtmlWebpackPlugin')
   .use(HtmlWebpackPlugin, [{
-    template: path.resolve(__dirname,'../index.html')// template
+    template: path.resolve(__dirname,'../public/index.html')// template
   }])
 
 webpackChainConfig

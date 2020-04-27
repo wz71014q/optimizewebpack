@@ -1,14 +1,14 @@
 <template>
   <div>
     <p class="test-text">
-      Life
+      Home
     </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Life',
+  name: 'Home',
   data() {
     return {
     };
