@@ -7,7 +7,7 @@ const webpackMerge = require('webpack-merge');
 const common = require('./webpack.common');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin')
 
 const webpackChainConfig = new WebpackChain();
 const smp = new SpeedMeasurePlugin();
@@ -16,35 +16,28 @@ webpackChainConfig
   .context(path.resolve(__dirname, '../'))
   .mode('production')
 
-if (process.env.NODE_ENV === 'analyze') {
-  webpackChainConfig
-    .plugin('BundleAnalyzerPlugin')
-    .use(BundleAnalyzerPlugin, [{
-      analyzerPort: 8900
-    }])
-}
-
 webpackChainConfig
   .optimization
-  .minimizer('mock')
-  .use(UglifyJsPlugin, [{
-    exclude: /\.min\.js$/, // 排除项
-    cache: true,
-    parallel: true, // 开启并行压缩，充分利用cpu
-    sourceMap: false,
-    extractComments: false, // 移除注释
-    uglifyOptions: {
-      compress: {
-        unused: true,
+  .minimizer('terser')
+  .use(TerserPlugin, [{
+      exclude: /\.min\.js$/, // 排除项
+      cache: true,
+      parallel: true, // 开启并行压缩，充分利用cpu
+      sourceMap: false,
+      extractComments: false, // 不生成注释文档
+      terserOptions: {
         warnings: false,
-        drop_debugger: true
-      },
-      output: {
-        comments: false // 移除注释
+        compress: {
+          unused: true,
+          drop_debugger: true,
+          pure_funcs: ['console.log']
+        },
+        output: {
+          comments: false // 移除注释
+        }
       }
-    }
-  }])
-  .end()
+    }]
+  )
 
 webpackChainConfig.module
   .rule('css')
@@ -69,7 +62,20 @@ webpackChainConfig.module
     .use('sass-loader')
       .loader('postcss-loader')
       .end()
-const proConfig = smp.wrap(webpackMerge(webpackChainConfig.toConfig(), common));
+
+if (process.env.NODE_ENV === 'analyze') {
+  webpackChainConfig
+    .plugin('BundleAnalyzerPlugin')
+    .use(BundleAnalyzerPlugin, [{
+      analyzerPort: 8900
+    }])
+}
+
+let proConfig = webpackMerge(webpackChainConfig.toConfig(), common);
+
+if (process.env.NODE_ENV === 'analyze') {
+  proConfig = smp.wrap(proConfig);
+}
 
 if (fs.existsSync(path.resolve(__dirname, '../dist'))) {
   rimraf.sync(path.resolve(__dirname, '../dist'))
