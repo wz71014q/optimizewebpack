@@ -60,6 +60,12 @@ webpackChainConfig.module
       .loader('vue-loader')
 
 webpackChainConfig.module
+.rule('js')
+  .test(/(\.jsx|\.js)$/)
+  .use('babel-loader')
+    .loader('babel-loader')
+
+webpackChainConfig.module
 .rule('images')
   .test(/\.(png|jpe?g|gif|webp)(\?.*)?$/)
   .use('url-loader')
@@ -127,7 +133,7 @@ webpackChainConfig.optimization
         test: /vue/,
         chunks: "initial",
         name: "vue",
-        priority: 10,
+        priority: 1, // 优先级
         enforce: true
       },
       vendor: {
@@ -148,5 +154,7 @@ webpackChainConfig.optimization
       }
     }
   })
+  .end()
+
 module.exports = webpackChainConfig.toConfig();
 
