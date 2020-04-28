@@ -3,6 +3,7 @@ const WebpackChain = require('webpack-chain');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const entries = require('./entry.js');
+const webpack = require('webpack')
 
 const entryArray = Object.keys(entries);
 const webpackChainConfig = new WebpackChain();
@@ -114,6 +115,12 @@ webpackChainConfig.module
       })
 
 webpackChainConfig
+  .plugin('DefinePlugin')
+  .use(webpack.DefinePlugin, [{
+    ISDEBUG: process.env.NODE_ENV !== 'production'
+  }])
+
+webpackChainConfig
   .plugin('VueLoaderPlugin')
   .use(VueLoaderPlugin, [{
     log: false
@@ -150,6 +157,7 @@ webpackChainConfig.optimization
         chunks: "initial",
         minChunks: 2,
         maxInitialRequests: 5,
+        priority: 5, // 优先级
         minSize: 0
       }
     }

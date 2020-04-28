@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import mockData from '@/mock/mock';
+import mockData from '@/service/menu';
 
 export default {
   name: 'Menu',
@@ -23,8 +23,8 @@ export default {
     console.log(mockData)
   },
   mounted () {
-    console.log('MOUNTED')
     this.data = mockData;
+    console.log('ISDEBUG: ', ISDEBUG)
   },
   methods: {
   }

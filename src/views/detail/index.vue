@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import mockData from '@/mock/mock';
+import mockData from '@/service/details';
 
 export default {
   name: 'Detail',

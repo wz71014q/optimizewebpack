@@ -28,6 +28,9 @@ webpackChainConfig
       terserOptions: {
         warnings: false,
         compress: {
+          booleans: true,
+          if_return: true,
+          sequences: true,
           unused: true,
           drop_debugger: true,
           pure_funcs: ['console.log']
@@ -62,7 +65,11 @@ webpackChainConfig.module
     .use('sass-loader')
       .loader('postcss-loader')
       .end()
-
+// webpackChainConfig
+//   .plugin('IgnorePlugin')
+//   .use(webpack.IgnorePlugin, [{
+//     resourceRegExp: /mock/
+//   }])
 if (process.env.NODE_ENV === 'analyze') {
   webpackChainConfig
     .plugin('BundleAnalyzerPlugin')
