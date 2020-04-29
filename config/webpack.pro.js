@@ -31,9 +31,9 @@ webpackChainConfig
           booleans: true,
           if_return: true,
           sequences: true,
-          unused: true,
+          unused: true, // 移除无效代码
           drop_debugger: true,
-          pure_funcs: ['console.log']
+          pure_funcs: ['console.log'] // 移除console.log
         },
         output: {
           comments: false // 移除注释
