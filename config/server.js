@@ -1,7 +1,4 @@
-const path = require('path');
-
 module.exports = {
-  contentBase: path.resolve(__dirname,'../dist'), // 本地服务器所加载的页面所在的目录
   host: 'localhost',
   port: '3000',
   headers: {
