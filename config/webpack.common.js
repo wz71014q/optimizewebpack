@@ -18,7 +18,7 @@ function getEntry() {
   webpackChainConfig
   .plugin(`index`)
   .use(HtmlWebpackPlugin, [{
-    filename: 'index.html',
+    filename: '../index.html',
     chunks: ['main', 'vendor', 'vue'],
     template: path.resolve(__dirname,'../public/index.html')// template
   }])
@@ -28,7 +28,7 @@ function getEntry() {
     webpackChainConfig
     .plugin(`html-${item}`)
     .use(HtmlWebpackPlugin, [{
-      filename: `${item}.html`,
+      filename: `../${item}.html`,
       chunks: [item, 'vendor', 'vue', 'mock'],
       template: path.resolve(__dirname,'../public/index.html')// template
     }])
@@ -40,9 +40,9 @@ getEntry()
 webpackChainConfig
   .stats(logConfig)
   .output
-    .path(path.resolve(__dirname, '../dist'))
+    .path(path.resolve(__dirname, '../dist/js'))
     .filename('[name].[hash:8].js')
-    .publicPath('./')
+    .publicPath('./js/')
     .end()
 
 webpackChainConfig.resolve
