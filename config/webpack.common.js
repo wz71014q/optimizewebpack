@@ -10,8 +10,8 @@ const entryArray = Object.keys(entries);
 const webpackChainConfig = new WebpackChain();
 
 (function getEntry() {
-  let  templateName = 'index';
-  let  chunkName = 'main';
+  let templateName = 'index';
+  let chunkName = 'main';
   entryArray.forEach(item => {
     if (/\./.test(item)) {
       chunkName = 'main';
