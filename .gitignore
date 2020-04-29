@@ -7,6 +7,6 @@ package-lock.json
 *.local
 
 # 自动生成
-pages.js
+**/pages.js
 entries
 dist
