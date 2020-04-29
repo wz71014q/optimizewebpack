@@ -2,8 +2,9 @@ const path = require('path');
 const WebpackChain = require('webpack-chain');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const entries = require('./entry.js');
 const webpack = require('webpack')
+const logConfig = require('./logConfig.js');
+const entries = require('./entry.js');
 
 const entryArray = Object.keys(entries);
 const webpackChainConfig = new WebpackChain();
@@ -37,6 +38,7 @@ function getEntry() {
 getEntry()
 
 webpackChainConfig
+  .stats(logConfig)
   .output
     .path(path.resolve(__dirname, '../dist'))
     .filename('[name].[hash:8].js')
@@ -53,6 +55,7 @@ webpackChainConfig.resolve
   .alias
     .set('@', path.resolve(__dirname, '../src'))
     .set('vue$', 'vue/dist/vue.esm.js')
+    .set('mockDataPath',  path.resolve(__dirname, '../src/mock/mock.js'))
 
 webpackChainConfig.module
   .rule('vue')

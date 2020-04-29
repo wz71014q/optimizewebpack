@@ -1,5 +1,6 @@
+import mockData from 'mockDataPath';
+
 let result = '';
-console.log(mockData);
 if (ISDEBUG) {
   result = mockData;
 }
