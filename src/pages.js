@@ -1,1 +1,0 @@
-module.exports = {"detail":"E:\\optimizewebpack\\entries\\detail.js","Home.vue":"E:\\optimizewebpack\\entries\\Home.js","life":"E:\\optimizewebpack\\entries\\life.js","menu":"E:\\optimizewebpack\\entries\\menu.js"}

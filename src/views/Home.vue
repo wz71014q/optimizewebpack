@@ -26,7 +26,9 @@ export default {
     init() {
       console.log(pages)
       for(const property in pages) {
-        this.pageList[property] = `${property}.html`
+        if (!/\./g.test(property)) {
+          this.pageList[property] = `${property}.html`
+        }
       }
     }
   }

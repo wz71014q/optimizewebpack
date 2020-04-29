@@ -1,7 +1,7 @@
-import mockData from 'mockDataPath';
 
 let result = '';
 if (ISDEBUG) {
+  const mockData = require('mockDataPath');
   result = mockData;
 }
 

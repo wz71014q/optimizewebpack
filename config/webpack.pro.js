@@ -65,11 +65,6 @@ webpackChainConfig.module
     .use('sass-loader')
       .loader('postcss-loader')
       .end()
-// webpackChainConfig
-//   .plugin('IgnorePlugin')
-//   .use(webpack.IgnorePlugin, [{
-//     resourceRegExp: /mock/
-//   }])
 if (process.env.NODE_ENV === 'analyze') {
   webpackChainConfig
     .plugin('BundleAnalyzerPlugin')

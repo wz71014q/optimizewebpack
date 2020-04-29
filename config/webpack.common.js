@@ -55,7 +55,7 @@ webpackChainConfig.resolve
   .alias
     .set('@', path.resolve(__dirname, '../src'))
     .set('vue$', 'vue/dist/vue.esm.js')
-    .set('mockDataPath',  path.resolve(__dirname, '../src/mock/mock.js'))
+    .set('mockDataPath', path.resolve(__dirname, '../src/mock/mock.js'))
 
 webpackChainConfig.module
   .rule('vue')

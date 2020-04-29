@@ -1,3 +1,4 @@
+// webpack log配置
 module.exports = {
   // 未定义选项时，stats 选项的备用值(fallback value)（优先级高于 webpack 本地默认值）
   all: undefined,

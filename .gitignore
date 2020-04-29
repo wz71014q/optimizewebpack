@@ -1,6 +1,12 @@
+# 依赖
 node_modules
-.vscode
-entries
 package-lock.json
-dist
+
+# 本地设置
+.vscode
 *.local
+
+# 自动生成
+pages.js
+entries
+dist
