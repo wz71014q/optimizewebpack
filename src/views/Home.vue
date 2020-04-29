@@ -1,6 +1,5 @@
 <template>
   <div id="root">
-    <!-- <router-view/> -->
     <ul>
       <li v-for="(val, name, index) in pageList" :key="index">
         <a :href="val">{{ name }}</a>

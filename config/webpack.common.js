@@ -9,39 +9,33 @@ const entries = require('./entry.js');
 const entryArray = Object.keys(entries);
 const webpackChainConfig = new WebpackChain();
 
-function getEntry() {
-  webpackChainConfig
-    .entry('main')
-    .add(path.resolve(__dirname, '../main.js'))
-    .end()
-
-  webpackChainConfig
-  .plugin(`index`)
-  .use(HtmlWebpackPlugin, [{
-    filename: '../index.html',
-    chunks: ['main', 'vendor', 'vue'],
-    template: path.resolve(__dirname,'../public/index.html')// template
-  }])
-
+(function getEntry() {
+  let  templateName = 'index';
+  let  chunkName = 'main';
   entryArray.forEach(item => {
-    webpackChainConfig.entry(item).merge([entries[item]]);
+    if (/\./.test(item)) {
+      chunkName = 'main';
+      templateName = 'index';
+    } else {
+      templateName = item;
+      chunkName = item;
+    }
+    webpackChainConfig.entry(chunkName).merge([entries[item]]);
     webpackChainConfig
     .plugin(`html-${item}`)
     .use(HtmlWebpackPlugin, [{
-      filename: `../${item}.html`,
-      chunks: [item, 'vendor', 'vue', 'mock'],
+      filename: `../${templateName}.html`,
+      chunks: [chunkName, 'vendor', 'vue', 'mock'],
       template: path.resolve(__dirname,'../public/index.html')// template
     }])
   })
-}
-
-getEntry()
+}())
 
 webpackChainConfig
   .stats(logConfig)
   .output
     .path(path.resolve(__dirname, '../dist/js'))
-    .filename('[name].[hash:8].js')
+    .filename(`${process.env.NODE_ENV === 'production' ? '[name].[chunkhash].js' : '[name].[hash].js'}`)
     .publicPath('./js/')
     .end()
 

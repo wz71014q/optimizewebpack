@@ -31,9 +31,7 @@ function buildFileContent(name) {
   const templateHome = `
   import Vue from 'vue';
   import App from '@/views/Home';
-  import router from '@/router'
   const $vm = new Vue({
-    router,
     components: { App },
     template: '<App/>'
   });
