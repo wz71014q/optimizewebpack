@@ -55,9 +55,11 @@ function buildFileContent(name) {
 }
 
 module.exports = (function() {
-  if (fs.existsSync(entriesDir)) {
-    rimraf.sync(entriesDir)
+  // if (fs.existsSync(entriesDir)) {
+  //   rimraf.sync(entriesDir)
+  // }
+  if (!fs.existsSync(entriesDir)) {
+    fs.mkdirSync(entriesDir)
   }
-  fs.mkdirSync(entriesDir)
   return buildEntry()
 }())
