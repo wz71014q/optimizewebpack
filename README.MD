@@ -1,3 +1,10 @@
-# 探索webpack优化——条件编译
+# 探索webpack优化，生产环境下删除指定部分代码或文件
 
-&emsp;&emsp;实际项目中，可能会有很多东西只在本地引用，如log信息、mock数据，生产打包时不想将这些文件打包进去，就可以使用条件编译去做。
+项目说明：[https://www.zhiqiang2726.com/2020/04/30/webpack%E9%80%89%E6%8B%A9%E6%80%A7%E7%BC%96%E8%AF%91/](https://www.zhiqiang2726.com/2020/04/30/webpack%E9%80%89%E6%8B%A9%E6%80%A7%E7%BC%96%E8%AF%91/)
+
+## 运行:
+
+```js
+npm start
+npm run build
+```
