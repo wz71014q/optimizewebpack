@@ -24,7 +24,7 @@ const webpackChainConfig = new WebpackChain();
     webpackChainConfig
     .plugin(`html-${item}`)
     .use(HtmlWebpackPlugin, [{
-      filename: `../${templateName}.html`,
+      filename: `${templateName}.html`,
       chunks: [chunkName, 'vendor', 'vue', 'mock'],
       template: path.resolve(__dirname,'../public/index.html')// template
     }])
@@ -34,9 +34,9 @@ const webpackChainConfig = new WebpackChain();
 webpackChainConfig
   .stats(logConfig)
   .output
-    .path(path.resolve(__dirname, '../dist/js'))
-    .filename(`${process.env.NODE_ENV === 'production' ? '[name].[chunkhash].js' : '[name].[hash].js'}`)
-    .publicPath('./js/')
+    .path(path.resolve(__dirname, '../dist'))
+    .filename(`js/${process.env.NODE_ENV === 'production' ? '[name].[chunkhash].js' : '[name].[hash].js'}`)
+    .publicPath('./')
     .end()
 
 webpackChainConfig.resolve
@@ -126,24 +126,16 @@ webpackChainConfig
 webpackChainConfig.optimization
   .splitChunks({
     chunks: 'all',
-    minSize: 30000,
-    minChunks: 1,
-    maxAsyncRequests: 5,
-    maxInitialRequests: 3,
-    automaticNameDelimiter: '~',
-    name: true,
     cacheGroups: {
       vue: {
         test: /vue/,
-        chunks: "initial",
         name: "vue",
-        priority: 1, // 优先级
-        enforce: true
+        priority: 1,
+        minChunks: 1
       },
       vendor: {
         test: /node_modules/,
         name: "vendor",
-        chunks: "initial",
         minChunks: 2,
         maxInitialRequests: 5,
         minSize: 0
@@ -151,7 +143,6 @@ webpackChainConfig.optimization
       mock: {
         test: /mock/,
         name: "mock",
-        chunks: "initial",
         minChunks: 2,
         maxInitialRequests: 5,
         priority: 5, // 优先级
