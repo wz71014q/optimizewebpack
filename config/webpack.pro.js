@@ -8,6 +8,8 @@ const common = require('./webpack.common');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin')
+const progressBarPlugin = require('progress-bar-webpack-plugin')
+const chalk = require('chalk');
 
 const webpackChainConfig = new WebpackChain();
 const smp = new SpeedMeasurePlugin();
@@ -72,7 +74,14 @@ if (process.env.NODE_ENV === 'analyze') {
       analyzerPort: 8900
     }])
 }
-
+webpackChainConfig
+  .plugin('ProgressBarPlugin')
+  .use(progressBarPlugin, [{
+    format: chalk.green('Building: ') + '[:bar]' + chalk.green(' :percent ') + chalk.yellow('(:elapsed seconds)'),
+    width: 30,
+    complete: chalk.green.bold('■'),
+    incomplete: '-'
+  }])
 let proConfig = webpackMerge(webpackChainConfig.toConfig(), common);
 
 if (process.env.NODE_ENV === 'analyze') {
