@@ -49,7 +49,11 @@ webpackChainConfig.module
     .use('sass-loader')
       .loader('postcss-loader')
       .end()
-
+webpackChainConfig
+  .plugin('ProvidePlugin')
+  .use(webpack.ProvidePlugin, [{
+    'mockData': 'mockDataPath'
+  }])
 portfinder.getPortPromise()
   .then((port) => {
     webpackChainConfig

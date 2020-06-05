@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import mockData from '@/service/life';
-
 export default {
   name: 'Life',
   data() {
@@ -19,12 +17,10 @@ export default {
       data: ''
     };
   },
-  created () {
-    console.log(mockData)
-  },
   mounted () {
-    console.log('MOUNTED')
-    this.data = mockData;
+    if (ISDEBUG) {
+      this.data = mockData;
+    }
   },
   methods: {
   }
