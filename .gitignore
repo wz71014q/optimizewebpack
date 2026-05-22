@@ -1,6 +1,7 @@
 # 依赖
 node_modules
 package-lock.json
+yarn.lock
 
 # 本地设置
 .vscode
